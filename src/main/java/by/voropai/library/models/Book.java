@@ -1,13 +1,13 @@
 package by.voropai.library.models;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 public class Book {
     private int id;
-    @NotNull
+    @NotEmpty(message = "Field 'Book name' shouldn't be empty")
     private String title;
-    @NotNull
+    @NotEmpty(message = "Field 'Author' shouldn't be empty")
     @Size(min = 2, max = 50, message = "Enter author's full name!")
     private String author;
     private int releaseYear;

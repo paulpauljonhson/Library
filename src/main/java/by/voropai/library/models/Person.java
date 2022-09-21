@@ -11,8 +11,8 @@ public class Person {
     @Size(min = 5, max = 50, message = "Enter your full name!")
     private String fullName;
     @NotNull
-    @Min(value = 1910L, message = "Enter valid year")
-    @Max(value = 2022L, message = "Enter valid year")
+    @Min(value = 1910, message = "Enter valid year")
+    @Max(value = 2022, message = "Enter valid year")
     private int birthYear;
 
     public Person(String fullName, int birthYear) {
