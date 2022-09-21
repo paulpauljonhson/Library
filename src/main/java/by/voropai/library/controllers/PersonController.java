@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping({"/people"})
 public class PersonController {
-    PersonDao personDao;
-    BookDao bookDao;
+    private final PersonDao personDao;
+    private final BookDao bookDao;
 
     public PersonController(PersonDao personDao, BookDao bookDao) {
         this.personDao = personDao;
@@ -27,14 +27,14 @@ public class PersonController {
 
     @GetMapping()
     public String index(Model model) {
-        model.addAttribute("people", this.personDao.index());
+        model.addAttribute("people", personDao.index());
         return "/people/index";
     }
 
     @GetMapping({"/{id}"})
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("person", this.personDao.show(id));
-        model.addAttribute("books", this.bookDao.booksInPossession(id));
+        model.addAttribute("person", personDao.show(id));
+        model.addAttribute("books", bookDao.booksInPossession(id));
         return "/people/show";
     }
 
@@ -48,14 +48,14 @@ public class PersonController {
         if (bindingResult.hasErrors()) {
             return "people/new";
         } else {
-            this.personDao.save(person);
+            personDao.save(person);
             return "redirect:/people";
         }
     }
 
     @GetMapping({"/{id}/edit"})
     public String edit(Model model, @PathVariable("id") int id) {
-        model.addAttribute("person", this.personDao.show(id));
+        model.addAttribute("person", personDao.show(id));
         return "people/edit";
     }
 
@@ -64,14 +64,14 @@ public class PersonController {
         if (bindingResult.hasErrors()) {
             return "people/edit";
         } else {
-            this.personDao.update(id, person);
+            personDao.update(id, person);
             return "redirect:/people";
         }
     }
 
     @DeleteMapping({"/{id}"})
     public String delete(@PathVariable("id") int id) {
-        this.personDao.delete(id);
+        personDao.delete(id);
         return "redirect:/people";
     }
 }
