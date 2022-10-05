@@ -2,7 +2,7 @@ package by.voropai.Project2SpringBoot.services;
 
 import by.voropai.Project2SpringBoot.models.Book;
 import by.voropai.Project2SpringBoot.models.Person;
-import by.voropai.Project2SpringBoot.repository.PersonRepository;
+import by.voropai.Project2SpringBoot.repository.PeopleRepository;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,25 +15,25 @@ import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
-public class PersonService {
-    PersonRepository personRepository;
+public class PeopleService {
+    PeopleRepository peopleRepository;
 
     @Autowired
-    public PersonService(PersonRepository personRepository) {
-        this.personRepository = personRepository;
+    public PeopleService(PeopleRepository peopleRepository) {
+        this.peopleRepository = peopleRepository;
     }
 
     public List<Person> findAll() {
-        return personRepository.findAll();
+        return peopleRepository.findAll();
     }
 
     public Person findById(int id) {
-        Optional<Person> foundPerson = personRepository.findById(id);
+        Optional<Person> foundPerson = peopleRepository.findById(id);
         return foundPerson.orElse(null);
     }
 
     public List<Book> getBooksInPossession(int id) {
-        Optional<Person> owner = personRepository.findById(id);
+        Optional<Person> owner = peopleRepository.findById(id);
         if (owner.isPresent()) {
             Hibernate.initialize(owner.get().getBooks());
             List<Book> books = owner.get().getBooks();
@@ -51,17 +51,17 @@ public class PersonService {
 
     @Transactional
     public void save(Person person) {
-        personRepository.save(person);
+        peopleRepository.save(person);
     }
 
     @Transactional
     public void update(int id, Person updatedPerson) {
         updatedPerson.setId(id);
-        personRepository.save(updatedPerson);
+        peopleRepository.save(updatedPerson);
     }
 
     @Transactional
     public void delete(int id) {
-        personRepository.deleteById(id);
+        peopleRepository.deleteById(id);
     }
 }

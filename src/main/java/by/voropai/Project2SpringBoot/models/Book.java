@@ -13,7 +13,6 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
-//@NoArgsConstructor
 
 @Entity
 @Table(name = "Book")
@@ -40,17 +39,6 @@ public class Book {
 
     @Transient
     private Boolean expired;
-
-//    public Book(int id, String title, String author, int releaseYear, Integer personId) {
-//        this.id = id;
-//        this.title = title;
-//        this.author = author;
-//        this.releaseYear = releaseYear;
-//        this.personId = personId;
-//    }
-
-//    public Book() {
-//    }
 
     @Override
     public boolean equals(Object o) {
