@@ -1,7 +1,8 @@
 package by.voropai.Project2SpringBoot.repositories;
 
 import by.voropai.Project2SpringBoot.models.Book;
-import by.voropai.Project2SpringBoot.repository.BookRepository;
+import by.voropai.Project2SpringBoot.repository.BooksRepository;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,15 +14,17 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @SpringBootTest
 class BooksRepositoryTest {
     @Autowired
-    BookRepository underTest;
-
+    BooksRepository underTest;
     @Test
     void itShouldFindBookByTitleStartingWithPrefix() {
         //given
-        String prefix = "Peace";
+        Book book = Book.builder()
+                .title("test_title")
+                .author("test_author").build();
+        underTest.save(book);
         //when
-        List<Book> booksWithPrefix = underTest.findByTitleStartingWith(prefix);
+        List<Book> foundBooks = underTest.findByTitleStartingWith("test");
         //then
-        assertThat(!booksWithPrefix.isEmpty()).isTrue();
+        assertThat(foundBooks.isEmpty()).isFalse();
     }
 }
