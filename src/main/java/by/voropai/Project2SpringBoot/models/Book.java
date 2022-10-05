@@ -11,8 +11,10 @@ import java.util.Objects;
 
 @Getter
 @Setter
+@Builder
 @ToString
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 
 @Entity
 @Table(name = "Book")

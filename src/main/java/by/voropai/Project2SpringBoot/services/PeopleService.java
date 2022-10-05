@@ -3,8 +3,8 @@ package by.voropai.Project2SpringBoot.services;
 import by.voropai.Project2SpringBoot.models.Book;
 import by.voropai.Project2SpringBoot.models.Person;
 import by.voropai.Project2SpringBoot.repository.PeopleRepository;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,15 +13,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
+
 @Service
 @Transactional(readOnly = true)
 public class PeopleService {
-    PeopleRepository peopleRepository;
-
-    @Autowired
-    public PeopleService(PeopleRepository peopleRepository) {
-        this.peopleRepository = peopleRepository;
-    }
+    private final PeopleRepository peopleRepository;
 
     public List<Person> findAll() {
         return peopleRepository.findAll();

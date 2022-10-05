@@ -9,24 +9,19 @@ import by.voropai.Project2SpringBoot.services.BooksService;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+@RequiredArgsConstructor
 
 @Controller
 @RequestMapping({"/books"})
 public class BooksController {
-
-    BooksService booksService;
-    PeopleRepository peopleRepository;
-
-    @Autowired
-    public BooksController(BooksService booksService, PeopleRepository peopleRepository) {
-        this.booksService = booksService;
-        this.peopleRepository = peopleRepository;
-    }
+    private final BooksService booksService;
+    private final PeopleRepository peopleRepository;
 
     @GetMapping("")
     public String index(Model model,

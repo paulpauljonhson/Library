@@ -8,15 +8,15 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Getter
 @Setter
 @ToString
-//@NoArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
+
 @Entity
 @Table(name = "Person")
 public class Person {
@@ -39,15 +39,6 @@ public class Person {
     @OneToMany(mappedBy = "owner")
     @ToString.Exclude
     private List<Book> books;
-
-
-//    public Person(String fullName, int birthYear) {
-//        this.fullName = fullName;
-//        this.birthYear = birthYear;
-//    }
-
-//    public Person() {
-//    }
 
     @Override
     public boolean equals(Object o) {

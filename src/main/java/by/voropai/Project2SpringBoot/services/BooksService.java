@@ -3,7 +3,7 @@ package by.voropai.Project2SpringBoot.services;
 import by.voropai.Project2SpringBoot.models.Book;
 import by.voropai.Project2SpringBoot.models.Person;
 import by.voropai.Project2SpringBoot.repository.BooksRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -13,15 +13,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
+
 @Service
 @Transactional(readOnly = true)
 public class BooksService {
-    BooksRepository booksRepository;
-
-    @Autowired
-    public BooksService(BooksRepository booksRepository) {
-        this.booksRepository = booksRepository;
-    }
+    private final BooksRepository booksRepository;
 
     public List<Book> findAll(boolean sortByYear) {
         if (sortByYear) {

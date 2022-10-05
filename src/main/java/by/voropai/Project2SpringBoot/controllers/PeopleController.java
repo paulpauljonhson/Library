@@ -5,6 +5,7 @@ import by.voropai.Project2SpringBoot.services.PeopleService;
 
 import javax.validation.Valid;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,15 +17,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequiredArgsConstructor
+
 @Controller
 @RequestMapping({"/people"})
 public class PeopleController {
-
-    PeopleService peopleService;
-
-    public PeopleController(PeopleService peopleService) {
-        this.peopleService = peopleService;
-    }
+    private final PeopleService peopleService;
 
     @GetMapping()
     public String index(Model model) {
